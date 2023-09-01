@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import static org.springframework.http.HttpStatus.CONFLICT;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @RestControllerAdvice
@@ -15,5 +16,11 @@ public class ExceptionHandledClass {
     public ResponseEntity<String> customerNotFoundExceptionHanded(CustomerByIdNotFoundException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(), NOT_FOUND);
+    }
+
+    @ExceptionHandler(CustomerIsAlreadyException.class)
+    public ResponseEntity<String> customerIsAlreadyExistingExceptionHanded(CustomerIsAlreadyException ex) {
+        log.error(ex.getMessage());
+        return new ResponseEntity<>(ex.getMessage(),CONFLICT);
     }
 }

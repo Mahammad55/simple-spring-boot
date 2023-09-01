@@ -8,4 +8,8 @@ public interface CustomerService {
     List<Customer> getCustomers();
 
     Customer getCustomerById(String id);
+
+    void checkExistingCustomer(Customer customer);
+
+    Customer createCustomer(Customer customer);
 }

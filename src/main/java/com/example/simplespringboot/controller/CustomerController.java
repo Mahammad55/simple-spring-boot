@@ -7,13 +7,11 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -33,5 +31,11 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomerById(@PathVariable String id) {
         Customer customer = customerService.getCustomerById(id);
         return new ResponseEntity<>(customer, OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer){
+        Customer newCustomer = customerService.createCustomer(customer);
+        return new ResponseEntity<>(newCustomer,CREATED);
     }
 }
