@@ -1,5 +1,6 @@
 package com.example.simplespringboot.service.impl;
 
+import com.example.simplespringboot.exception.CustomerByIdNotFoundException;
 import com.example.simplespringboot.model.Customer;
 import com.example.simplespringboot.service.CustomerService;
 import lombok.AccessLevel;
@@ -14,6 +15,7 @@ import java.util.UUID;
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerServiceImpl implements CustomerService {
     static List<Customer> customers;
+    static final String NOT_FOUND_EXCEPTION = "Customer with id = %s not found!";
 
     static {
         if (customers == null) {
@@ -31,5 +33,16 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public List<Customer> getCustomers() {
         return customers;
+    }
+
+    @Override
+    public Customer getCustomerById(String id) {
+        return customers
+                .stream()
+                .filter(customer -> customer.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() ->
+                        new CustomerByIdNotFoundException(NOT_FOUND_EXCEPTION.formatted(id))
+                );
     }
 }
