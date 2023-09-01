@@ -12,4 +12,6 @@ public interface CustomerService {
     void checkExistingCustomer(Customer customer);
 
     Customer createCustomer(Customer customer);
+
+    void deleteCustomer(String id);
 }

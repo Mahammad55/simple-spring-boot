@@ -38,4 +38,10 @@ public class CustomerController {
         Customer newCustomer = customerService.createCustomer(customer);
         return new ResponseEntity<>(newCustomer,CREATED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCustomer(@PathVariable String id){
+        customerService.deleteCustomer(id);
+        return new ResponseEntity<>(OK);
+    }
 }

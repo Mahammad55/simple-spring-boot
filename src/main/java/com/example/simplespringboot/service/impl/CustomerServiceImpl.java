@@ -68,4 +68,12 @@ public class CustomerServiceImpl implements CustomerService {
         customers.add(customer);
         return customer;
     }
+
+    @Override
+    public void deleteCustomer(String id) {
+        customers = customers
+                .stream()
+                .filter(customer -> !customer.getId().equals(id))
+                .toList();
+    }
 }
