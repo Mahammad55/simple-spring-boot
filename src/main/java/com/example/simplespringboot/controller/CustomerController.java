@@ -2,8 +2,8 @@ package com.example.simplespringboot.controller;
 
 import com.example.simplespringboot.model.Customer;
 import com.example.simplespringboot.service.CustomerService;
+import jakarta.validation.Valid;
 import lombok.AccessLevel;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.http.HttpMethod;
@@ -35,7 +35,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
+    public ResponseEntity<Customer> createCustomer(@Valid @RequestBody Customer customer) {
         Customer newCustomer = customerService.createCustomer(customer);
         return new ResponseEntity<>(newCustomer, CREATED);
     }

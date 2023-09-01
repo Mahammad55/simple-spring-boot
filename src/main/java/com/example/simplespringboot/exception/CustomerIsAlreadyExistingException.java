@@ -1,10 +1,10 @@
 package com.example.simplespringboot.exception;
 
-public class CustomerIsAlreadyException extends RuntimeException{
-    public CustomerIsAlreadyException() {
+public class CustomerIsAlreadyExistingException extends RuntimeException{
+    public CustomerIsAlreadyExistingException() {
     }
 
-    public CustomerIsAlreadyException(String message) {
+    public CustomerIsAlreadyExistingException(String message) {
         super(message);
     }
 }

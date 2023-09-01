@@ -1,7 +1,7 @@
 package com.example.simplespringboot.service.impl;
 
 import com.example.simplespringboot.exception.CustomerByIdNotFoundException;
-import com.example.simplespringboot.exception.CustomerIsAlreadyException;
+import com.example.simplespringboot.exception.CustomerIsAlreadyExistingException;
 import com.example.simplespringboot.model.Customer;
 import com.example.simplespringboot.service.CustomerService;
 import lombok.AccessLevel;
@@ -56,7 +56,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .filter(newCustomer -> newCustomer.getSurname().equals(customer.getSurname()))
                 .findFirst()
                 .ifPresent(customer1 -> {
-                    throw new CustomerIsAlreadyException(ALREADY_EXISTING_EXCEPTION.formatted(customer.getName(), customer.getSurname()));
+                    throw new CustomerIsAlreadyExistingException(ALREADY_EXISTING_EXCEPTION.formatted(customer.getName(), customer.getSurname()));
                 });
     }
 
@@ -71,6 +71,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public void deleteCustomer(String id) {
+        getCustomerById(id);
         customers = customers
                 .stream()
                 .filter(customer -> !customer.getId().equals(id))

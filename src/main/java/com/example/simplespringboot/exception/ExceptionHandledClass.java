@@ -18,8 +18,8 @@ public class ExceptionHandledClass {
         return new ResponseEntity<>(ex.getMessage(), NOT_FOUND);
     }
 
-    @ExceptionHandler(CustomerIsAlreadyException.class)
-    public ResponseEntity<String> customerIsAlreadyExistingExceptionHanded(CustomerIsAlreadyException ex) {
+    @ExceptionHandler(CustomerIsAlreadyExistingException.class)
+    public ResponseEntity<String> customerIsAlreadyExistingExceptionHanded(CustomerIsAlreadyExistingException ex) {
         log.error(ex.getMessage());
         return new ResponseEntity<>(ex.getMessage(),CONFLICT);
     }
